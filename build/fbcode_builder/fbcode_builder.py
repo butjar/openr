@@ -506,15 +506,14 @@ class FBCodeBuilder(object):
         prefix = self.option("prefix")
         return [
             self.run(ShellQuoted("sudo ./bootstrap.sh"
-                                 " --with=all"
                                  " --prefix={prefix}".format(prefix=prefix))),
         ]
 
     def b2_build(self):
-        return [self.run(ShellQuoted("sudo ./b2")),]
+        return [self.run(ShellQuoted("sudo ./b2 --with=all")),]
 
     def b2_install(self):
         return [
-            self.run(ShellQuoted("sudo ./b2 install")),
+            self.run(ShellQuoted("sudo ./b2 --with=all install")),
             self.run(ShellQuoted("sudo ldconfig")),
         ]
