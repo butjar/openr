@@ -11,6 +11,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import debian_specs.python_fbthrift as python_fbthrift
 import debian_specs.python_fbzmq as python_fbzmq
+import specs.fb303 as fb303
 import specs.fbzmq as fbzmq
 import specs.fbthrift as fbthrift
 import specs.folly as folly
@@ -48,7 +49,7 @@ def fbcode_builder_spec(builder):
     ]
 
     return {
-        "depends_on": [folly, fbthrift, python_fbthrift, fbzmq, python_fbzmq, re2],
+        "depends_on": [fb303, folly, fbthrift, python_fbthrift, fbzmq, python_fbzmq, re2],
         "steps": [
             builder.github_project_workdir("thom311/libnl", "."),
             builder.step("Build and install thom311/libnl", libnl_build_commands),

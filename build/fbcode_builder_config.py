@@ -10,6 +10,7 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import specs.fb303 as fb303
 import specs.fbthrift as fbthrift
 import specs.fbzmq as fbzmq
 import specs.fmt as fmt
@@ -48,7 +49,7 @@ def fbcode_builder_spec(builder):
     ]
 
     return {
-        "depends_on": [fmt, folly, fbthrift, fbzmq, re2],
+        "depends_on": [fb303, fmt, folly, fbthrift, fbzmq, re2],
         "steps": [
             builder.github_project_workdir("thom311/libnl", "."),
             builder.step("Build and install thom311/libnl", libnl_build_commands),
