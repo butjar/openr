@@ -204,7 +204,6 @@ class FBCodeBuilder(object):
             'git',
             'gperf',
             'joe',
-            'libboost-all-dev',
             'libcap-dev',
             'libdouble-conversion-dev',
             'libevent-dev',
@@ -466,4 +465,56 @@ class FBCodeBuilder(object):
         return [
             self.fb_github_project_workdir(project_and_path, github_org),
             self.cargo_build(project_and_path),
+        ]
+
+    def boost_download_build_install(self):
+        version = self.option("boost_version")
+        version_ = version.replace(".", "_")
+        basedir = self.option("projects_dir")
+        workdir = path_join(basedir,
+                            "boost_{version_}".format(version_=version_))
+        return [
+            self.workdir("/tmp"),
+            self.boost_download_unpack(),
+            self.workdir(workdir),
+            self.boost_bootstrap(),
+            self.b2_build(),
+            self.b2_install(),
+        ]
+
+    def boost_download_unpack(self):
+        basedir = self.option("projects_dir")
+        version = self.option("boost_version")
+        version_ = version.replace(".", "_")
+        return [
+            self.run(ShellQuoted("wget https://dl.bintray.com/boostorg/release/"
+                                 "{version}/source/"
+                                 "boost_{version_}.tar.gz".format(
+                                     version=version,
+                                     version_=version_)),
+            ),
+            self.run(ShellQuoted("tar -C {dir} -zxvf boost_{version_}.tar.gz".format(
+                dir=basedir,
+                version_=version_))
+            ),
+            self.run(ShellQuoted("rm -rf boost_{version_}.tar.gz".format(
+                version_=version_))
+            ),
+        ]
+
+    def boost_bootstrap(self):
+        prefix = self.option("prefix")
+        return [
+            self.run(ShellQuoted("sudo ./bootstrap.sh"
+                                 " --with=all"
+                                 " --prefix={prefix}".format(prefix=prefix))),
+        ]
+
+    def b2_build(self):
+        return [self.run(ShellQuoted("sudo ./b2")),]
+
+    def b2_install(self):
+        return [
+            self.run(ShellQuoted("sudo ./b2 install")),
+            self.run(ShellQuoted("sudo ldconfig")),
         ]

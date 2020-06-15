@@ -192,7 +192,9 @@ if __name__ == "__main__":
         os.path.dirname(__file__), "debian_system_fbcode_builder_config.py"
     )
     config = read_fbcode_builder_config(config_file)
-    builder = DebianSystemFBCodeBuilder(projects_dir=projects_dir)
+    boost_version = "1.69.0"
+    builder = DebianSystemFBCodeBuilder(projects_dir=projects_dir,
+                                        boost_version=boost_version)
 
     if distutils.spawn.find_executable("ccache"):
         ccache_dir = ccache_dir()
