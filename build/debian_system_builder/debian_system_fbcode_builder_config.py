@@ -9,9 +9,9 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import debian_specs.fbzmq as fbzmq
 import debian_specs.python_fbthrift as python_fbthrift
 import debian_specs.python_fbzmq as python_fbzmq
+import specs.fbzmq as fbzmq
 import specs.fbthrift as fbthrift
 import specs.folly as folly
 import specs.re2 as re2

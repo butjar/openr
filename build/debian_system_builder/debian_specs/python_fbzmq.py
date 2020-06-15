@@ -5,7 +5,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import debian_specs.fbzmq as fbzmq
+import specs.fbzmq as fbzmq
 
 from shell_quoting import ShellQuoted, path_join
 
