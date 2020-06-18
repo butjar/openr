@@ -506,7 +506,8 @@ class FBCodeBuilder(object):
         prefix = self.option("prefix")
         return [
             self.run(ShellQuoted("sudo ./bootstrap.sh"
-                                 " --prefix={prefix}".format(prefix=prefix))),
+                                 " --prefix={prefix}"
+                                 " --with-python-version=3.6".format(prefix=prefix))),
         ]
 
     def b2_build(self):

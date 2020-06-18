@@ -85,6 +85,8 @@ def fbcode_builder_spec(builder):
                     ),
                     builder.run(ShellQuoted("sudo python setup.py build")),
                     builder.run(ShellQuoted("sudo python setup.py install")),
+                    builder.run(ShellQuoted("sudo python3 setup.py build")),
+                    builder.run(ShellQuoted("sudo python3 setup.py install")),
                 ],
             ),
             builder.step(
