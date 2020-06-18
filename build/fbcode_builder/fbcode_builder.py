@@ -515,5 +515,6 @@ class FBCodeBuilder(object):
     def b2_install(self):
         return [
             self.run(ShellQuoted("sudo ./b2 --with=all install")),
+            self.run(ShellQuoted("sudo ./b2 --with-python install")),
             self.run(ShellQuoted("sudo ldconfig")),
         ]
