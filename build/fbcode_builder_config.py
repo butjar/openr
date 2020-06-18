@@ -61,7 +61,7 @@ def fbcode_builder_spec(builder):
                     # we need the pythonpath to find the thrift compiler
                     builder.run(
                         ShellQuoted(
-                            'PYTHONPATH="$PYTHONPATH:"{p}/lib/python2.7/site-packages '
+                            'PYTHONPATH="$PYTHONPATH:"{p}/lib/python3.6/site-packages '
                             "make -j {n}"
                         ).format(
                             p=builder.option("prefix"),

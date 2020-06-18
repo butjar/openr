@@ -31,7 +31,7 @@ def fbcode_builder_spec(builder):
                 builder.cmake_configure('fbzmq/_build'),
                 # we need the pythonpath to find the thrift compiler
                 builder.run(ShellQuoted(
-                    'PYTHONPATH="$PYTHONPATH:"{p}/lib/python2.7/site-packages '
+                    'PYTHONPATH="$PYTHONPATH:"{p}/lib/python3.6/site-packages '
                     'make -j {n}'
                 ).format(p=builder.option('prefix'), n=builder.option('make_parallelism'))),
                 builder.run(ShellQuoted('make install')),
