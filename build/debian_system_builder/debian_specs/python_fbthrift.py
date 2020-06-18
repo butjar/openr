@@ -17,17 +17,11 @@ def fbcode_builder_spec(builder):
             builder.step(
                 "Install thrift python modules",
                 [
-                    builder.workdir(
-                        path_join(
-                            builder.option('projects_dir'),
-                            "fbthrift/thrift/lib/py"
-                        )
+                    builder.workdir(path_join(builder.option('projects_dir'),
+                                              "fbthrift/thrift/lib/py")
                     ),
-                    builder.run(
-                        ShellQuoted(
-                            "sudo python setup.py install"
-                        )
-                    ),
+                    builder.run(ShellQuoted("sudo python setup.py install")),
+                    builder.run(ShellQuoted("sudo python3 setup.py install")),
                 ]
             ),
         ],
